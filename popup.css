@@ -1,0 +1,32 @@
+
+html {
+  width: 600px;
+}
+body {
+  margin: 10px;
+  white-space: nowrap;
+  background-color: #FFFED0;
+  width: 600px;
+
+}
+
+h1 {
+  font-size: 30px;
+  color: #43488E;
+  font-family: 'Raleway', sans-serif;
+  border-bottom: 6px solid black;
+  width: 65px;
+  border-color: #43488E;
+  padding-bottom: 4px;
+}
+
+h2 {
+  font-size: 20px;
+  color: #43488E;
+}
+
+1
+
+.col-sm {
+    word-wrap: break-word;
+}
