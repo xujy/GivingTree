@@ -14,7 +14,9 @@ class Category:
     ResearchPublicPolicy = 10
     Religion = 11
 
-class CharityAPI():
+class CharityNavigator():
+
+
     def __init__(self):
         self.url = 'https://api.data.charitynavigator.org/v2/Organizations'
         self.app_id = '54cad626'
@@ -23,6 +25,8 @@ class CharityAPI():
         self.rated = True
         self.sort = 'RATING'
         self.scope = 'INTERNATIONAL'
+
+
     def getcharity(self, watsonresult):
         payload = {
             'app_id': self.app_id,
@@ -37,15 +41,14 @@ class CharityAPI():
         r = requests.get(self.url, params=payload)
         return r.json()
 
+
     def parse(self, rawdata):
         print type(rawdata)
         for item in rawdata:
             #print item
             print '\n'
 
+
     def runpipe(self, watsonresult):
         resp = self.getcharity(watsonresult)
         formatresult = self.parse(resp)
-
-
-charity = CharityAPI()

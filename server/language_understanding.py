@@ -6,7 +6,7 @@ from watson_developer_cloud import NaturalLanguageUnderstandingV1
 import watson_developer_cloud.natural_language_understanding.features.v1 \
   as Features
 
-class WatsonProxy():
+class LanguageUnderstanding():
 
 
     def __init__(self):
@@ -26,8 +26,7 @@ class WatsonProxy():
             Features.Keywords(limit=3,emotion=True,sentiment=True),
             Features.Entities(limit=3,emotion=True,sentiment=True),
             Features.Categories(),
-            Features.MetaData(),
-            Features.Sentiment(targets=['Environment'])
+            Features.MetaData()
         ])
         print json.dumps(response, indent=2)
         return json.dumps(response, indent=2)
