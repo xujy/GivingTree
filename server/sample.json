@@ -1,0 +1,163 @@
+{
+  "language": "en",
+  "entities": [
+    {
+      "emotion": {
+        "anger": 0.20893,
+        "joy": 0.49824,
+        "sadness": 0.062875,
+        "fear": 0.120713,
+        "disgust": 0.055578
+      },
+      "count": 3,
+      "sentiment": {
+        "score": 0.331256,
+        "label": "positive"
+      },
+      "text": "James Sutter",
+      "disambiguation": {
+        "subtype": [],
+        "name": "James Sutter",
+        "dbpedia_resource": "http://dbpedia.org/resource/James_Sutter"
+      },
+      "relevance": 0.821141,
+      "type": "Person"
+    },
+    {
+      "emotion": {
+        "anger": 0.164536,
+        "joy": 0.553956,
+        "sadness": 0.103729,
+        "fear": 0.151287,
+        "disgust": 0.099624
+      },
+      "count": 1,
+      "sentiment": {
+        "score": 0.0,
+        "label": "neutral"
+      },
+      "text": "Ohio",
+      "disambiguation": {
+        "subtype": [
+          "PoliticalDistrict",
+          "AdministrativeDivision",
+          "GovernmentalJurisdiction",
+          "USState",
+          "StateOrCounty"
+        ],
+        "name": "Ohio",
+        "dbpedia_resource": "http://dbpedia.org/resource/Ohio"
+      },
+      "relevance": 0.382158,
+      "type": "Location"
+    }
+  ],
+  "keywords": [
+    {
+      "relevance": 0.99762,
+      "text": "climate change",
+      "emotion": {
+        "anger": 0.029349,
+        "joy": 0.166612,
+        "sadness": 0.506504,
+        "fear": 0.291721,
+        "disgust": 0.00976
+      },
+      "sentiment": {
+        "score": -0.783524,
+        "label": "negative"
+      }
+    },
+    {
+      "relevance": 0.838377,
+      "text": "Mr. Sutter",
+      "emotion": {
+        "anger": 0.201491,
+        "joy": 0.497638,
+        "sadness": 0.052851,
+        "fear": 0.145208,
+        "disgust": 0.035495
+      },
+      "sentiment": {
+        "score": 0.0,
+        "label": "neutral"
+      }
+    },
+    {
+      "relevance": 0.798501,
+      "text": "high school classroom",
+      "emotion": {
+        "anger": 0.164536,
+        "joy": 0.553956,
+        "sadness": 0.103729,
+        "fear": 0.151287,
+        "disgust": 0.099624
+      },
+      "sentiment": {
+        "score": 0.0,
+        "label": "neutral"
+      }
+    }
+  ],
+  "concepts": [
+    {
+      "relevance": 0.977368,
+      "text": "Education",
+      "dbpedia_resource": "http://dbpedia.org/resource/Education"
+    },
+    {
+      "relevance": 0.81429,
+      "text": "Teacher",
+      "dbpedia_resource": "http://dbpedia.org/resource/Teacher"
+    },
+    {
+      "relevance": 0.656705,
+      "text": "School",
+      "dbpedia_resource": "http://dbpedia.org/resource/School"
+    }
+  ],
+  "usage": {
+    "text_characters": 1494,
+    "features": 5,
+    "text_units": 1
+  },
+  "retrieved_url": "https://www.nytimes.com/2017/10/19/reader-center/ohio-athens-climate.html",
+  "categories": [
+    {
+      "score": 0.485709,
+      "label": "/science"
+    },
+    {
+      "score": 0.346554,
+      "label": "/society"
+    },
+    {
+      "score": 0.309259,
+      "label": "/education"
+    }
+  ],
+  "metadata": {
+    "publication_date": "2017-10-19T00:00:00",
+    "image": "https://static01.nyt.com/images/2017/06/03/us/Harmon-promo/00climateclass-01-videoSixteenByNineJumbo1600.jpg",
+    "authors": [
+      {
+        "name": "AMY HARMON"
+      },
+      {
+        "name": "Amy Harmon"
+      },
+      {
+        "name": "amy-harmon"
+      },
+      {
+        "name": "amy.harmon"
+      }
+    ],
+    "feeds": [
+      {
+        "link": "https://myaccount.nytimes.com/membercenter/feedback.html"
+      }
+    ],
+    "title": "A Reporter Returns to Ohio to Discuss the Challenges of Teaching Climate Change"
+  }
+}
