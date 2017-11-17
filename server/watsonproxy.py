@@ -1,42 +1,21 @@
-import json
 from collections import defaultdict
+import json
+import operator
+
 from watson_developer_cloud import NaturalLanguageUnderstandingV1
 import watson_developer_cloud.natural_language_understanding.features.v1 \
   as Features
 
-json_data=open("sample.json").read()
-data = json.loads(json_data)
-response = defaultdict(list)
-for key,value in data.items():
-
-    '''if key == entities:
-        print""
-
-    if key == concepts:
-        print""
-
-
-    if key == keywords:
-        print""
-
-    if key == categories:
-        print""'''
-
-    if key == "metadata":
-        response["title"] = value["title"]
-
-print response
-
-
 class WatsonProxy():
+
+
     def __init__(self):
-        self.resultdict = {}
         self.api = {
-            "url": "https://gateway.watsonplatform.net/natural-language-understanding/api",
-            "username": "cac72f87-4a20-45c6-9b45-0305632c0bfc",
-            "password": "K0ILmZ3JqLiN"
+            'url': 'https://gateway.watsonplatform.net/natural-language-understanding/api',
+            'username': 'cac72f87-4a20-45c6-9b45-0305632c0bfc',
+            'password': 'K0ILmZ3JqLiN'
         }
-        self.natural_language_understanding = NaturalLanguageUnderstandingV1(username= self.api['username'],password= self.api['password'],version="2017-02-27")
+        self.natural_language_understanding = NaturalLanguageUnderstandingV1(username= self.api['username'],password= self.api['password'],version='2017-02-27')
 
 
     def nlu(self,urlstr):
@@ -53,14 +32,31 @@ class WatsonProxy():
 
 
     def parse(self, data):
+        result = defaultdict(list)
+        for key,value in data.items():
+            if key == 'keywords':
+                for item in value:
+                    data = {}
+                    keyword = item['text']
+                    emotions = item['emotion']
+                    data['sentiment'] = item['sentiment']['label']
+                    data['emotion'] = max(emotions.iteritems(), key=operator.itemgetter(1))[0]
+                    data['title'] = keyword
+                    result['keywords'].append(data)
 
-        return
+            if key == 'concepts':
+                for item in value:
+                    result['concepts'].append(item['text'])
+
+            if key == 'categories':
+                for item in value:
+                    result['categories'].append(item['label'].strip('/'))
+
+            if key == 'metadata':
+                result['title'] = value['title']
+        return json.dumps(result)
 
 
     def runpipe(self, urlstr):
         resp = self.nlu(urlstr)
-        print(resp)
-        #return parse(resp)
-
-#watson = WatsonProxy()
-#watson.runpipe("https://www.nytimes.com/2017/10/19/reader-center/ohio-athens-climate.html")
+        return self.parse(json.loads(resp))

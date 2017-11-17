@@ -14,8 +14,8 @@ watson = WatsonProxy()
 @app.route('/', methods=["POST"])
 def GET():
     url = request.form.get('url')
-    watson.runpipe(url)
-    return '200'
+    return watson.runpipe(url)
+
 
 
 if __name__ == '__main__':
