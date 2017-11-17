@@ -27,7 +27,9 @@ class WatsonProxy():
             Features.Entities(limit=3,emotion=True,sentiment=True),
             Features.Categories(),
             Features.MetaData(),
+            Features.Sentiment(targets=['Environment'])
         ])
+        print json.dumps(response, indent=2)
         return json.dumps(response, indent=2)
 
 
@@ -43,6 +45,7 @@ class WatsonProxy():
                     data['emotion'] = max(emotions.iteritems(), key=operator.itemgetter(1))[0]
                     data['title'] = keyword
                     result['keywords'].append(data)
+
 
             if key == 'concepts':
                 for item in value:
