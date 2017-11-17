@@ -1,3 +1,3 @@
 # givingtree
 
-take action and make meaningful donations.
+a chrome extension to take action and make meaningful donations.
