@@ -22,13 +22,13 @@ class LanguageUnderstanding():
         response = self.natural_language_understanding.analyze(
         url=urlstr,
         features=[
-            Features.Concepts(limit=3),
-            Features.Keywords(limit=3,emotion=True,sentiment=True),
-            Features.Entities(limit=3,emotion=True,sentiment=True),
+            Features.Concepts(limit=5),
+            Features.Keywords(limit=5,emotion=True,sentiment=True),
+            Features.Entities(limit=5,emotion=True,sentiment=True),
             Features.Categories(),
             Features.MetaData()
         ])
-        print json.dumps(response, indent=2)
+        #print json.dumps(response, indent=2)
         return json.dumps(response, indent=2)
 
 
@@ -38,13 +38,26 @@ class LanguageUnderstanding():
             if key == 'keywords':
                 for item in value:
                     data = {}
-                    keyword = item['text']
-                    emotions = item['emotion']
-                    data['sentiment'] = item['sentiment']['label']
-                    data['emotion'] = max(emotions.iteritems(), key=operator.itemgetter(1))[0]
-                    data['title'] = keyword
-                    result['keywords'].append(data)
 
+                    try:
+                        keyword = item['text']
+                        data['title'] = keyword
+                    except:
+                        data['title'] = ''
+
+                    try:
+                        emotions = item['emotion']
+                        data['emotion'] = max(emotions.iteritems(), key=operator.itemgetter(1))[0]
+                    except:
+                        emotions = ''
+
+
+                    try:
+                        data['sentiment'] = item['sentiment']['label']
+                    except:
+                        data['sentiment'] = ''
+
+                    result['keywords'].append(data)
 
             if key == 'concepts':
                 for item in value:
