@@ -4,20 +4,26 @@ from flask import Flask, request
 from flask_cors import CORS
 
 from language_understanding import LanguageUnderstanding
+from language_classifier import LanguageClassifier
 from charity_navigator import CharityNavigator
 
 app = Flask(__name__)
 CORS(app)
 
-lanUn = LanguageUnderstanding()
-charity = CharityNavigator()
+language_classifier = LanguageClassifier()
+language_understanding = LanguageUnderstanding()
+charity_navigator = CharityNavigator()
 
 @app.route('/', methods=["POST"])
 def GET():
+
     url = request.form.get('url')
-    unRes = lanUn.runpipe(url)
-    charity.runpipe(unRes)
+    res = language_understanding.runpipe(url)
+    category = language_classifier.classify(json.loads(res))
+    charity_navigator.runpipe(json.loads(res), category)
+
+
     return '200'
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)

@@ -1,19 +1,6 @@
 import json
 import requests
 
-class Category:
-    Animals = 1
-    ArtsCultureHumanities = 2
-    CommunityDevelopment = 3
-    Education = 4
-    Environment = 5
-    Health = 6
-    HumanCivilRights = 7
-    HumanServices = 8
-    International = 9
-    ResearchPublicPolicy = 10
-    Religion = 11
-
 class CharityNavigator():
 
 
@@ -24,20 +11,25 @@ class CharityNavigator():
         self.pageSize = 5
         self.rated = True
         self.sort = 'RATING'
-        self.scope = 'INTERNATIONAL'
+        self.minRating = 4
 
 
-    def getcharity(self, watsonresult):
+    def getcharity(self, categoryID, search="", scope='NATIONAL', state=''):
         payload = {
             'app_id': self.app_id,
             'app_key': self.app_key,
             'pageSize': self.pageSize,
-            'search': 'oil sands business and industrial energy natural gas Petroleum, Canada, Natural gas',
+            'search': search,
             'rated': self.rated,
             'sort': self.sort,
-            'categoryID': Category.Animals
-            #'scopeOfWork' : self.scope
+            'categoryID': categoryID,
+            'scopeOfWork' : scope,
+            'state': ''
         }
+
+        if scope == 'REGIONAL':
+            payload['state'] = state
+
         r = requests.get(self.url, params=payload)
         return r.json()
 
@@ -45,10 +37,43 @@ class CharityNavigator():
     def parse(self, rawdata):
         print type(rawdata)
         for item in rawdata:
-            #print item
+            print item
             print '\n'
 
 
-    def runpipe(self, watsonresult):
-        resp = self.getcharity(watsonresult)
+    def decompose_category(self, category):
+        if category == 'Animals':
+            return 1
+        elif category == 'ArtsCultureHumanities':
+            return 2
+        elif category == 'Education':
+            return 3
+        elif category == 'Environment':
+            return 4
+        elif category == 'Health':
+            return 5
+        elif category == 'HumanServices':
+            return 6
+        elif category == 'International':
+            return 7
+        elif category == 'HumanCivilRights':
+            return 8
+        elif category == 'Religion':
+            return 9
+        elif category == 'CommunityDevelopment':
+            return 10
+        elif category == 'ResearchPublicPolicy':
+            return 11
+        else:
+            return 0
+
+
+    def runpipe(self, watsonresult, category):
+        search = " ".join([x['title'] for x in watsonresult['keywords']])
+        categoryID = self.decompose_category(category)
+
+        if not categoryID:
+            raise ValueError('Invalid category name')
+
+        resp = self.getcharity(categoryID, search)
         formatresult = self.parse(resp)
