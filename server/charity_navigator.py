@@ -14,7 +14,7 @@ class CharityNavigator():
         self.minRating = 4
 
 
-    def getcharity(self, categoryID, search="", scope='NATIONAL', state=''):
+    def getcharity(self, categoryID, search="", scope='INTERNATIONAL', state=''):
         payload = {
             'app_id': self.app_id,
             'app_key': self.app_key,
@@ -35,11 +35,14 @@ class CharityNavigator():
 
 
     def parse(self, rawdata):
-        print type(rawdata)
-        for item in rawdata:
-            print item
-            print '\n'
-
+        result = {'result' : []}
+        for charity in rawdata:
+            data = {}
+            data['charityName'] = charity['charityName']
+            data['tagLine'] = charity['tagLine']
+            data['cause'] = charity['cause']['causeName']
+            result['result'].append(data)
+        return result
 
     def decompose_category(self, category):
         if category == 'Animals':
@@ -77,3 +80,4 @@ class CharityNavigator():
 
         resp = self.getcharity(categoryID, search)
         formatresult = self.parse(resp)
+        return formatresult

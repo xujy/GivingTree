@@ -20,10 +20,7 @@ def GET():
     url = request.form.get('url')
     res = language_understanding.runpipe(url)
     category = language_classifier.classify(json.loads(res))
-    charity_navigator.runpipe(json.loads(res), category)
-
-
-    return '200'
+    return json.dumps(charity_navigator.runpipe(json.loads(res), category))
 
 if __name__ == '__main__':
     app.run(debug=True)
