@@ -1,3 +1,3 @@
-language_classifier.pyc
-language_understanding.pyc
-charity_navigator.pyc
+server/language_classifier.pyc
+server/language_understanding.pyc
+server/charity_navigator.pyc
