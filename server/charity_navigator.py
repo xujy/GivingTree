@@ -27,7 +27,7 @@ class CharityNavigator():
             'state': ''
         }
 
-        if scope == 'REGIONAL':
+        if scope == 'REGIONAL' or 'NATIONAL':
             payload['state'] = state
 
         r = requests.get(self.url, params=payload)
@@ -37,11 +37,14 @@ class CharityNavigator():
     def parse(self, rawdata):
         result = {'result' : []}
         for charity in rawdata:
-            data = {}
-            data['charityName'] = charity['charityName']
-            data['tagLine'] = charity['tagLine']
-            data['cause'] = charity['cause']['causeName']
-            result['result'].append(data)
+            try:
+                data = {}
+                data['charityName'] = charity['charityName']
+                data['tagLine'] = charity['tagLine']
+                data['cause'] = charity['cause']['causeName']
+                result['result'].append(data)
+            except:
+                print 'Invalid Data'
         return result
 
     def decompose_category(self, category):
