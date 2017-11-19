@@ -40,6 +40,7 @@ class CharityNavigator():
             try:
                 data = {}
                 data['charityName'] = charity['charityName']
+                data['charityNavigatorURL'] = charity['charityNavigatorURL']
                 data['tagLine'] = charity['tagLine']
                 data['cause'] = charity['cause']['causeName']
                 result['result'].append(data)
